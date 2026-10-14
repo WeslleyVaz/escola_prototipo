@@ -11,13 +11,17 @@ return new class extends Migration
         Schema::create('ocorrencia_log', function (Blueprint $table) {
             $table->id();
 
+            $table->string('rm_aluno', 5);
+
             $table->foreignId('id_ocorrencia')
                 ->constrained('ocorrencias')
                 ->cascadeOnDelete();
 
-            $table->unsignedBigInteger('id_aluno_ocorrido');
+            $table->unsignedBigInteger('id_aluno');
 
             $table->string('inspetora_responsavel', 100);
+
+            $table->string('ocorrido', 200);
 
             $table->text('procedimento_realizado');
 

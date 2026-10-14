@@ -11,13 +11,19 @@ return new class extends Migration
         Schema::create('ocorrencias', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('id_aluno_ocorrido')
+            $table->string('rm_aluno', 5);
+
+            $table->foreignId('id_aluno')
                 ->constrained('aluno')
                 ->cascadeOnDelete();
+
+            $table->string('turma_aluno', 10);
 
             $table->foreignId('inspetora_responsavel')
                 ->constrained('inspetoras')
                 ->cascadeOnDelete();
+
+            $table->string('ocorrido', 200);
 
             $table->text('procedimento_realizado');
 

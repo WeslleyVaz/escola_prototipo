@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model
+class inspetoras extends Model
 {
-    protected $table = 'usuario';
+    protected $table = 'inspetoras';
 
     public $timestamps = false;
 
     protected $fillable = [
         'cpf',
         'senha',
-        'tipo',
     ];
 
     protected $hidden = ['senha'];
