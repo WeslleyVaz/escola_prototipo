@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class OcorrenciaApiTest extends TestCase
@@ -25,6 +27,27 @@ class OcorrenciaApiTest extends TestCase
             $migration = glob(database_path('migrations/*create_inspetoras.php'))[0];
             (require $migration)->up();
         }
+    }
+
+    public function test_salvar_ocorrencias_persists_id_inspetora(): void
+    {
+        if (Schema::hasColumn('ocorrencias', 'inspetora_responsavel')) {
+            Schema::table('ocorrencias', function (Blueprint $table): void {
+                $table->renameColumn('inspetora_responsavel', 'id_inspetora');
+            });
+        }
+
+        $payload = $this->validPayload();
+        $inspectorId = $payload['inspetora_responsavel'];
+        unset($payload['inspetora_responsavel']);
+        $payload['id_inspetora'] = $inspectorId;
+        $payload['ocorrido'] = 'Desentendimento entre alunos.';
+
+        $this->postJson('/api/salvar_ocorrencias', $payload)
+            ->assertOk()
+            ->assertJsonPath('erro', 'n');
+
+        $this->assertDatabaseHas('ocorrencias', $payload);
     }
 
     public function test_cadastro_persists_all_validated_fields(): void

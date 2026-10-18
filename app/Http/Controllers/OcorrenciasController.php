@@ -14,17 +14,17 @@ class OcorrenciasController
             'id_aluno' => ['required', 'integer'],
             'rm_aluno' => ['required', 'string', 'max:5'],
             'turma_aluno' => ['required', 'string', 'max:10'],
-            'id_inspetora_responsavel' => ['required', 'integer'],
+            'id_inspetora' => ['required', 'integer'],
             'ocorrido' => ['required', 'string', 'max:200'],
             'procedimento_realizado' => ['required', 'string', 'max:200'],
         ]);
 
         try {
-            $ocorrencia = new Ocorrencia();
+            $ocorrencia = new Ocorrencia;
             $ocorrencia->id_aluno = $request->id_aluno;
             $ocorrencia->rm_aluno = $request->rm_aluno;
             $ocorrencia->turma_aluno = $request->turma_aluno;
-            $ocorrencia->id_inspetora_responsavel = $request->id_inspetora_responsavel;
+            $ocorrencia->id_inspetora = $request->id_inspetora;
             $ocorrencia->ocorrido = $request->ocorrido;
             $ocorrencia->procedimento_realizado = $request->procedimento_realizado;
 
@@ -116,6 +116,4 @@ class OcorrenciasController
         }
 
     }
-
-
 }
