@@ -45,7 +45,7 @@ class Ocorrencias_gestaoController
             'id_aluno' => ['required', 'integer'],
             'rm_aluno' => ['required', 'string', 'max:5'],
             'turma_aluno' => ['required', 'string', 'max:10'],
-            'id_inspetora_responsavel' => ['required', 'integer'],
+            'inspetora_responsavel' => ['required', 'integer'],
             'ocorrido' => ['required', 'string', 'max:200'],
             'procedimento_realizado' => ['required', 'string', 'max:200'],
         ]);

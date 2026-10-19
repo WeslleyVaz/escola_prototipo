@@ -14,21 +14,21 @@ class Ocorrencias_inspetorasController
             'id_aluno' => ['required', 'integer'],
             'rm_aluno' => ['required', 'string', 'max:5'],
             'turma_aluno' => ['required', 'string', 'max:10'],
-            'id_inspetora' => ['required', 'integer'],
+            'inspetora_responsavel' => ['required', 'integer'],
             'ocorrido' => ['required', 'string', 'max:200'],
             'procedimento_realizado' => ['required', 'string', 'max:200'],
         ]);
 
         try {
-            $ocorrencia = new Ocorrencias_inspetoras;
-            $ocorrencia->id_aluno = $request->id_aluno;
-            $ocorrencia->rm_aluno = $request->rm_aluno;
-            $ocorrencia->turma_aluno = $request->turma_aluno;
-            $ocorrencia->id_inspetora = $request->id_inspetora;
-            $ocorrencia->ocorrido = $request->ocorrido;
-            $ocorrencia->procedimento_realizado = $request->procedimento_realizado;
+            $ocorrencia_inspetoras = new Ocorrencias_inspetoras;
+            $ocorrencia_inspetoras->id_aluno = $request->id_aluno;
+            $ocorrencia_inspetoras->rm_aluno = $request->rm_aluno;
+            $ocorrencia_inspetoras->turma_aluno = $request->turma_aluno;
+            $ocorrencia_inspetoras->inspetora_responsavel = $request->inspetora_responsavel;
+            $ocorrencia_inspetoras->ocorrido = $request->ocorrido;
+            $ocorrencia_inspetoras->procedimento_realizado = $request->procedimento_realizado;
 
-            $ocorrencia->save();
+            $ocorrencia_inspetoras->save();
 
             return response()->json(['message' => 'Ocorrência cadastrada com sucesso!', 'erro' => 'n'], 200);
         } catch (\Throwable $th) {
