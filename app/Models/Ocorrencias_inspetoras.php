@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ocorrencia extends Model
+class Ocorrencias_inspetoras extends Model
 {
-    protected $table = 'ocorrencias';
+    protected $table = 'ocorrencias_inspetoras';
 
     protected $fillable = [
         'id_aluno',
         'turma_aluno',
         'rm_aluno',
         'inspetora_responsavel',
-        "ocorrido",
+        'ocorrido',
         'procedimento_realizado',
     ];
 }
