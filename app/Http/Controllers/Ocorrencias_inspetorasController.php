@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Ocorrencias_inspetoras;
+use Illuminate\Http\Request;
 
 class Ocorrencias_inspetorasController
 {

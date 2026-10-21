@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ocorrencias_gestao;
+use App\Models\Ocorrencias_inspetoras;
 use Illuminate\Http\Request;
 
 class Ocorrencias_gestaoController
 {
-
     // vizualizar ocorrencia
     public function ver_ocorrencia(Request $request)
     {
@@ -32,7 +32,7 @@ class Ocorrencias_gestaoController
 
     public function listar_ocorrencias_simples(Request $request)
     {
-        $ocorrencias = Ocorrencias_gestao::select('rm_aluno', 'ocorrido')->get();
+        $ocorrencias = Ocorrencias_inspetoras::select('rm_aluno', 'ocorrido')->get();
 
         return response()->json(['ocorrencias' => $ocorrencias], 200);
     }
@@ -42,6 +42,7 @@ class Ocorrencias_gestaoController
     {
 
         $request->validate([
+            'id' => ['required', 'integer', 'exists:ocorrencias_inspetoras,id'],
             'id_aluno' => ['required', 'integer'],
             'rm_aluno' => ['required', 'string', 'max:5'],
             'turma_aluno' => ['required', 'string', 'max:10'],
@@ -52,10 +53,10 @@ class Ocorrencias_gestaoController
 
         try {
 
-            $ocorrencia = Ocorrencias_gestao::find($request->id);
+            $ocorrencia = Ocorrencias_inspetoras::findOrFail($request->integer('id'));
 
             if ($ocorrencia->ocorrido != $request->ocorrido) {
-                $ocorrencia_ocorrido_igual = Ocorrencias_gestao::where('ocorrido', $request->ocorrido)->first();
+                $ocorrencia_ocorrido_igual = Ocorrencias_inspetoras::where('ocorrido', $request->ocorrido)->first();
                 if ($ocorrencia_ocorrido_igual) {
                     return response()->json(['message' => 'Ocorrência já cadastrada!', 'erro' => 's'], 200);
                 }
@@ -75,11 +76,11 @@ class Ocorrencias_gestaoController
     public function deletar_ocorrencia(Request $request)
     {
         $request->validate([
-            'id' => 'required|integer|exists:ocorrencias,id',
+            'id' => 'required|integer|exists:ocorrencias_inspetoras,id',
         ]);
 
         try {
-            $ocorrencia = Ocorrencias_gestao::find($request->id);
+            $ocorrencia = Ocorrencias_inspetoras::findOrFail($request->integer('id'));
             $ocorrencia->delete();
 
             return response()->json(['message' => 'Ocorrência deletada com sucesso!', 'erro' => 'n'], 200);
