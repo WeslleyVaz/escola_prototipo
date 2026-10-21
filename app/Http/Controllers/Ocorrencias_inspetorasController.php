@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Ocorrencias_inspetoras;
+use Illuminate\Http\Request;
 
 class Ocorrencias_inspetorasController
 {
@@ -14,7 +14,7 @@ class Ocorrencias_inspetorasController
             'id_aluno' => ['required', 'integer'],
             'rm_aluno' => ['required', 'string', 'max:5'],
             'turma_aluno' => ['required', 'string', 'max:10'],
-            'id_inspetora' => ['required', 'integer'],
+            'inspetora_responsavel' => ['required', 'integer'],
             'ocorrido' => ['required', 'string', 'max:200'],
             'procedimento_realizado' => ['required', 'string', 'max:200'],
         ]);
@@ -24,7 +24,7 @@ class Ocorrencias_inspetorasController
             $ocorrencia->id_aluno = $request->id_aluno;
             $ocorrencia->rm_aluno = $request->rm_aluno;
             $ocorrencia->turma_aluno = $request->turma_aluno;
-            $ocorrencia->id_inspetora = $request->id_inspetora;
+            $ocorrencia->inspetora_responsavel = $request->inspetora_responsavel;
             $ocorrencia->ocorrido = $request->ocorrido;
             $ocorrencia->procedimento_realizado = $request->procedimento_realizado;
 
