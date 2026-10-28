@@ -40,3 +40,7 @@ Route::get('/listar_gestao', [gestaoController::class, 'listar_gestao']);
 
 // OCORRENCIA FOR INSPETORA
 Route::post('/salvar_ocorrencias', [Ocorrencias_inspetorasController::class, 'salvar_ocorrencias']);
+
+
+//login_oficial inpetoras
+Route::post('/login_inspetoras', [inspetoraController::class, 'login_inspetoras']);

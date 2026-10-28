@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\inspetoras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\InspetorasToken;
 
 class inspetoraController
 {
@@ -47,4 +48,33 @@ class inspetoraController
 
         return response()->json(['inspetoras' => $inspetoras], 200);
     }
+
+    public function login_inspetoras(Request $request)
+    {
+        $request->validate([
+            'cpf' => ['required'],
+            'senha' => ['nullable']
+        ]);
+
+        $inspetoras = inspetoras::where('cpf', "=", $request->cpf)->first();
+        if($inspetoras){
+            if (Hash::check($request->senha, $inspetoras->senha)) {
+                $inspetoras_token = new InspetorasToken();
+                $inspetoras_token->inspetoras_id = $inspetoras->id;
+                $inspetoras_token->token = Hash::make($inspetoras->id . $inspetoras->cpf . now());
+                $inspetoras_token->valido_ate = now()->addDays(7);
+
+                $inspetoras_token->save();
+                return response()->json(['message' => 'Login realizado com sucesso!', 'erro' => 'n', 'inspetora' => $inspetoras, 'token' => $inspetoras_token->token], 200);
+
+            } else {
+                return response()->json(['message' => 'Senha incorreta!', 'erro' => 's'], 200);
+            }
+
+        }else {
+            return response()->json(['message' => 'Inspetora não encontrada!', 'erro' => 's'], 200);
+        }
+
+    }
+
 }
