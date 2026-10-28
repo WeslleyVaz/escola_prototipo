@@ -7,6 +7,7 @@ use App\Http\Controllers\Ocorrencias_gestaoController;
 use App\Http\Controllers\Ocorrencias_inspetorasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\LoginApiMiddleware;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -27,9 +28,9 @@ Route::get('/listar_ocorrencias_simples', [Ocorrencias_gestaoController::class, 
 
 Route::post('/salvar_inspetora', [inspetoraController::class, 'salvar_inspetora']);
 
-Route::get('/ver_inspetora', [inspetoraController::class, 'ver_inspetora']);
+Route::get('/ver_inspetora', [inspetoraController::class, 'ver_inspetora'])->middleware(LoginApiMiddleware::class);
 
-Route::get('/listar_inspetoras', [inspetoraController::class, 'listar_inspetoras']);
+Route::get('/listar_inspetoras', [inspetoraController::class, 'listar_inspetoras'])->middleware(LoginApiMiddleware::class);
 
 // alunos
 Route::post('/salvar_aluno', [AlunoController::class, 'salvar_aluno']);
@@ -44,3 +45,7 @@ Route::post('/salvar_ocorrencias', [Ocorrencias_inspetorasController::class, 'sa
 
 //login_oficial inpetoras
 Route::post('/login_inspetoras', [inspetoraController::class, 'login_inspetoras']);
+
+
+//login_oficial gestao
+Route::post('/autenticar_gestao', [gestaoController::class, 'autenticar_gestao']);
