@@ -10,7 +10,7 @@ class InspetorasToken extends Model
 
     protected $fillable = [
         'inspetoras_id',
-        'token',
+        'token_inspetora',
         'valido_ate',
     ];
 

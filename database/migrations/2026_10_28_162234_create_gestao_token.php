@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('gestao_id');
             $table->foreign('gestao_id')->references('id')->on('gestao')->onDelete('cascade');
-            $table->text('token');
+            $table->text('token_gestao');
             $table->timestamp('valido_ate')->nullable();
             $table->timestamps();
         });
@@ -27,10 +27,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('gestao_token', function (Blueprint $table) {
-            $table->dropForeign(['inspetoras_id']);
-            });
+            $table->dropForeign(['gestao_id']);
+        });
 
-    
         Schema::dropIfExists('gestao_token');
     }
 };

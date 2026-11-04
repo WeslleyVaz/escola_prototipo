@@ -10,7 +10,7 @@ class GestaoToken extends Model
 
     protected $fillable = [
         'gestao_id',
-        'token',
+        'token_gestao',
         'valido_ate',
     ];
 
@@ -19,4 +19,3 @@ class GestaoToken extends Model
         return $this->belongsTo(Gestao::class, 'gestao_id');
     }
 }
-
