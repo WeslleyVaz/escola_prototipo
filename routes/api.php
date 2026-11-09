@@ -29,9 +29,9 @@ Route::get('/listar_ocorrencias_simples', [Ocorrencias_gestaoController::class, 
 
 Route::post('/salvar_inspetora', [inspetoraController::class, 'salvar_inspetora']);
 
-Route::get('/ver_inspetora', [inspetoraController::class, 'ver_inspetora'])->middleware(LoginInspetoraApiMiddleware::class);
+Route::get('/ver_inspetora', [inspetoraController::class, 'ver_inspetora'])->middleware(LoginGestaoApiMiddleware ::class);
 
-Route::get('/listar_inspetoras', [inspetoraController::class, 'listar_inspetoras'])->middleware(LoginInspetoraApiMiddleware::class);
+Route::get('/listar_inspetoras', [inspetoraController::class, 'listar_inspetoras'])->middleware(LoginGestaoApiMiddleware::class);
 
 // alunos
 Route::post('/salvar_aluno', [AlunoController::class, 'salvar_aluno']);
@@ -49,4 +49,4 @@ Route::post('/salvar_ocorrencias', [Ocorrencias_inspetorasController::class, 'sa
 Route::post('/login_inspetoras', [inspetoraController::class, 'login_inspetoras']);
 
 // login_oficial gestao
-Route::post('/autenticar_gestao', [gestaoController::class, 'autenticar_gestao']);
+Route::post('/Login_gestao', [gestaoController::class, 'Login_gestao']);

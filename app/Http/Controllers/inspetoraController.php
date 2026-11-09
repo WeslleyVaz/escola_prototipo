@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers;
 
@@ -38,7 +38,7 @@ class inspetoraController
         if ($inspetora) {
             return response()->json(['inspetora' => $inspetora, 'erro' => 'n'], 200);
         } else {
-            return response()->json(['message' => 'Inspetora não encontrada!', 'erro' => 's'], 200);
+            return response()->json(['message' => 'Inspetora nÃ£o encontrada!', 'erro' => 's'], 200);
         }
     }
 
@@ -53,7 +53,7 @@ class inspetoraController
     {
         $request->validate([
             'cpf' => ['required'],
-            'senha' => ['nullable']
+            'senha' => ['required', 'string']
         ]);
 
         $inspetoras = inspetoras::where('cpf', "=", $request->cpf)->first();
@@ -61,20 +61,21 @@ class inspetoraController
             if (Hash::check($request->senha, $inspetoras->senha)) {
                 $inspetoras_token = new InspetorasToken();
                 $inspetoras_token->inspetoras_id = $inspetoras->id;
-                $inspetoras_token->token = Hash::make($inspetoras->id . $inspetoras->cpf . now());
+                $inspetoras_token->token_inspetora = Hash::make($inspetoras->id . $inspetoras->cpf . now());
                 $inspetoras_token->valido_ate = now()->addDays(7);
 
                 $inspetoras_token->save();
-                return response()->json(['message' => 'Login realizado com sucesso!', 'erro' => 'n', 'inspetora' => $inspetoras, 'token' => $inspetoras_token->token], 200);
+                return response()->json(['message' => 'Login realizado com sucesso!', 'erro' => 'n', 'inspetora' => $inspetoras, 'token' => $inspetoras_token->token_inspetora], 200);
 
             } else {
                 return response()->json(['message' => 'Senha incorreta!', 'erro' => 's'], 200);
             }
 
         }else {
-            return response()->json(['message' => 'Inspetora não encontrada!', 'erro' => 's'], 200);
+            return response()->json(['message' => 'Inspetora nÃ£o encontrada!', 'erro' => 's'], 200);
         }
 
     }
 
 }
+

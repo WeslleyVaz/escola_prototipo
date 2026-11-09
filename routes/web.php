@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InspetoraLoginController;
 
 Route::view('/', 'inicio')->name('inicio');
 
@@ -23,3 +24,7 @@ Route::view('/saidas-antecipadas', 'saidas-antecipadas')->name('saidas-antecipad
 Route::view('/registrar-saida-antecipada', 'registrar-saida-antecipada')->name('registrar-saida-antecipada');
 
 Route::view('/relatorios', 'relatorios')->name('relatorios');
+
+
+//login inspetoras//
+Route::get('/login_teste', [InspetoraLoginController::class, 'MostrarLogin'])->name('login_teste');

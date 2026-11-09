@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\GestaoToken;
-use carbon\Carbon;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +23,7 @@ class LoginGestaoApiMiddleware
                 ->where('valido_ate', '>', Carbon::now())
                 ->first();
 
-            if ($token) {
+            if (! $token) {
                 return response()->json(['message' => 'Token inválido ou expirado!', 'erro' => 's'], 200);
             }
 
