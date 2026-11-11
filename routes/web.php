@@ -1,12 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InspetoraLoginController;
-use App\Http\Controllers\InspetoraController;
 use App\Http\Controllers\DashboardInspetorasController;
-use App\Http\Middleware\LogadoWebMiddleware;
 use App\Http\Middleware\LogadoGestaoMiddleware;
-use App\Http\Controllers\gestaoController;
+use App\Http\Middleware\LogadoWebMiddleware;
+use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'inicio')->name('inicio');
 
@@ -30,10 +27,9 @@ Route::view('/registrar-saida-antecipada', 'registrar-saida-antecipada')->name('
 
 Route::view('/relatorios', 'relatorios')->name('relatorios');
 
-
-//login inspetoras//
+// login inspetoras//
 Route::redirect('/login_teste', '/login-inspetoras')->name('login_teste');
 Route::get('/dashboard-inspetoras', [DashboardInspetorasController::class, 'index_inspetora'])->middleware(LogadoWebMiddleware::class)->name('dashboard-inspetoras');
 
-//login gestao//
+// login gestao//
 Route::get('/dashboard-coordenacao', [DashboardInspetorasController::class, 'dashboard-coordenacao'])->middleware(LogadoGestaoMiddleware::class)->name('dashboard-coordenacao');
