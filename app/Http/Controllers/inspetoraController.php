@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -72,7 +72,7 @@ class inspetoraController
             }
 
         }else {
-            return response()->json(['message' => 'Inspetora nÃ£o encontrada!', 'erro' => 's'], 200);
+            return response()->json(['message' => 'Inspetora nÃo encontrada!', 'erro' => 's'], 200);
         }
 
     }

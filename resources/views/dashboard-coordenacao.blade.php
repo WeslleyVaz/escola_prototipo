@@ -19,6 +19,12 @@
         <p>Acompanhe os registros e as atividades escolares.</p>
     </div>
 
+    @if($gestao == 'S')
+        <a class="btn btn-soft-red" href="{{ route('relatorios') }}">Ver relatórios <i class="bi bi-arrow-right"></i></a>
+        @else
+        <p class="text-center">Acesso restrito</p>
+        @endif
+
     <section class="stat-grid stat-grid-four" aria-label="Indicadores gerais">
         <article class="stat-card stat-card-compact">
             <div class="stat-card-label"><i class="bi bi-people"></i> Alunos cadastrados</div>

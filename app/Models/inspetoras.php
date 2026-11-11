@@ -26,4 +26,5 @@ class inspetoras extends Model
             'senha' => 'hashed',
         ];
     }
+
 }

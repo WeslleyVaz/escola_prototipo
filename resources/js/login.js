@@ -1,51 +1,55 @@
-﻿$(document).ready(function() {
-    $('#entrar').click(function() {
-        
-        alert('entrei');
-    
-    });
+$(document).ready(function() {
+    $('#login-inspetoras').submit(function(event) {
+        event.preventDefault();
 
-    if ($("cpf").val() === "" || $("senha").val() === "") {
-        Swal.fire({
-            icon: 'error',
-            title: 'Erro',
-            text: 'Preencha todos os campos!',
-        });
-    }
+        var cpf = $('#cpf-inspetora').val();
+        var senha = $('#senha-inspetora').val();
 
-    var letras = $('#senha').val().length
-    console.log(letras);
-    if (letras < 6) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Erro',
-            text: 'A senha deve ter no mínimo 6 caracteres!',
-        });
-        return;
-    }
+        if(cpf === '' || senha === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os campos!',
+            });
+            return;
+        }
 
-    $.ajax({
-        url: './api/login_inspetoras',
-        type: 'POST',
-        data: {
-            email: $('#cpf').val(),
-            senha: $('#senha').val()
-        },
-        success: function(response) {
-            if (response.erro == 'n') {
-                alert(response.token);
-                $.cookie('token', response.token, { expires: 7 });
-                $.cookie('inspetora_id', response.inspetora_id, { expires: 7 });
-                setTimeout(function() {
-                    window.location.href = './home';
-                }, 3000);
-            } else {
+        if(senha.length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'A senha deve ter pelo menos 6 caracteres!',
+            });
+            return;
+        }
+
+        $.ajax({
+            url: '/api/login_inspetoras',
+            type: 'POST',
+            data: {
+                cpf: cpf,
+                senha: senha
+            },
+            success: function(response) {
+                if(response.erro === 'n') {
+                    $.cookie('inspetora_token', response.token, { expires: 7, path: '/' });
+                    $.cookie('inspetoras_id', response.inspetora.id, { expires: 7, path: '/' });
+                    window.location.href = '/dashboard-inspetoras';
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: response.message,
+                    });
+                }
+            },
+            error: function(response) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Erro',
-                    text: response.mensagem,
+                    text: response.responseJSON?.message || 'Não foi possível realizar o login. Tente novamente.',
                 });
             }
-        }
+        });
     });
 });
