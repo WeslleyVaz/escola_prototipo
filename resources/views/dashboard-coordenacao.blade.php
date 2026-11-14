@@ -19,7 +19,7 @@
         <p>Acompanhe os registros e as atividades escolares.</p>
     </div>
 
-    @if($gestao == 'S')
+    @if($gestao)
         <a class="btn btn-soft-red" href="{{ route('relatorios') }}">Ver relatórios <i class="bi bi-arrow-right"></i></a>
         @else
         <p class="text-center">Acesso restrito</p>

@@ -6,6 +6,7 @@ use App\Models\gestao;
 use App\Models\GestaoToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class gestaoController
 {
@@ -37,13 +38,12 @@ class gestaoController
         return response()->json(['gestao' => $gestao], 200);
     }
 
-
-    //login gestão
+    // login gestão
     public function login_gestao(Request $request)
     {
         $request->validate([
             'cpf' => ['required'],
-            'senha' => ['nullable'],
+            'senha' => ['required', 'string'],
         ]);
 
         $gestao = gestao::where('cpf', '=', $request->cpf)->first();
@@ -52,12 +52,18 @@ class gestaoController
             if (Hash::check($request->senha, $gestao->senha)) {
                 $gestaoToken = new GestaoToken;
                 $gestaoToken->gestao_id = $gestao->id;
-                $gestaoToken->token_gestao = Hash::make($request->cpf.$request->senha.now());
+                $token = Str::random(64);
+                $gestaoToken->token_gestao = Hash::make($token);
                 $gestaoToken->valido_ate = now()->addDays(7);
 
                 $gestaoToken->save();
 
-                return response()->json(['message' => 'Login realizado com sucesso!', 'erro' => 'n'], 200);
+                return response()->json([
+                    'message' => 'Login realizado com sucesso!',
+                    'erro' => 'n',
+                    'gestao' => ['id' => $gestao->id],
+                    'token' => $token,
+                ], 200);
 
             } else {
                 return response()->json(['message' => 'Senha incorreta!', 'erro' => 's'], 200);
@@ -67,7 +73,7 @@ class gestaoController
         }
     }
 
-    //LOGOUT
+    // LOGOUT
     public function logout_gestao(Request $request)
     {
         $request->validate([
@@ -85,5 +91,3 @@ class gestaoController
 
     }
 }
-
-

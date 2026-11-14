@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardGestaoController;
 use App\Http\Controllers\DashboardInspetorasController;
 use App\Http\Middleware\LogadoGestaoMiddleware;
 use App\Http\Middleware\LogadoWebMiddleware;
@@ -32,4 +33,4 @@ Route::redirect('/login_teste', '/login-inspetoras')->name('login_teste');
 Route::get('/dashboard-inspetoras', [DashboardInspetorasController::class, 'index_inspetora'])->middleware(LogadoWebMiddleware::class)->name('dashboard-inspetoras');
 
 // login gestao//
-Route::get('/dashboard-coordenacao', [DashboardInspetorasController::class, 'dashboard-coordenacao'])->middleware(LogadoGestaoMiddleware::class)->name('dashboard-coordenacao');
+Route::get('/dashboard-coordenacao', [DashboardGestaoController::class, 'index_gestao'])->middleware(LogadoGestaoMiddleware::class)->name('dashboard-coordenacao');

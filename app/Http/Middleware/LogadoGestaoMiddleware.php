@@ -2,58 +2,50 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\gestao;
+use App\Models\GestaoToken;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use App\Models\GestaoToken;
-use App\Models\Gestao;
 use Illuminate\Support\Facades\Cookie;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Response;
 
 class LogadoGestaoMiddleware
 {
     /**
      * Handle an incoming request.
      *
-     * @param Closure(Request): (Response) $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Cookie::has('gestao_token') && Cookie::has('gestao_id')) {
+        $token = $request->cookie('gestao_token') ?? $request->cookie('token_gestao');
+        $gestao_id = $request->cookie('gestao_id');
 
-            $gestao_id = Cookie::get('gestao_id');
-            $token = Cookie::get('gestao_token');
-
-            $token_gestao = GestaoToken::where('gestao_id', $gestao_id)
-                ->where('token_gestao', $token)
+        if ($token && $gestao_id) {
+            $tokens_gestao = GestaoToken::where('gestao_id', $gestao_id)
                 ->where('valido_ate', '>', Carbon::now())
-                ->first();
+                ->get();
+            $token_gestao = $tokens_gestao->first(function (GestaoToken $token_gestao) use ($token): bool {
+                return Hash::check($token, $token_gestao->token_gestao);
+            });
 
             if ($token_gestao) {
-
-                $gestao = Gestao::find($gestao_id);
-                $request->gestao = $gestao;
-
-                $gestao = Gestao::where('gestao_id', $gestao_id)->first();
+                $gestao = gestao::find($gestao_id);
 
                 if ($gestao) {
+                    $request->gestao = $gestao;
+
                     return $next($request);
-                } else {
-                    Cookie::forget('gestao_token');
-                    Cookie::forget('gestao_id');
-
-                    return redirect()->route('login_teste');
                 }
-
-            } else {
-                Cookie::forget('gestao_token');
-                Cookie::forget('gestao_id');
-
-                return redirect()->route('login_teste');
             }
-
-        } else {
-            return redirect()->route('login_teste');
         }
+
+        Cookie::forget('gestao_token');
+        Cookie::forget('token_gestao');
+        Cookie::forget('gestao_id');
+
+        return redirect()->route('login-gestao');
     }
 }

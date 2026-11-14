@@ -52,4 +52,47 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#login-gestao').submit(function(event) {
+        event.preventDefault();
+
+        const cpf = $('#cpf-gestao').val();
+        const senha = $('#senha-gestao').val();
+
+        if (!cpf || !senha) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: 'Preencha o CPF e a senha.',
+            });
+            return;
+        }
+
+        $.ajax({
+            url: '/api/login_gestao',
+            type: 'POST',
+            data: { cpf, senha },
+            success: function(response) {
+                if (response.erro === 'n') {
+                    $.cookie('gestao_token', response.token, { expires: 7, path: '/' });
+                    $.cookie('gestao_id', response.gestao.id, { expires: 7, path: '/' });
+                    window.location.href = '/dashboard-coordenacao';
+                    return;
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Não foi possível entrar',
+                    text: response.message,
+                });
+            },
+            error: function(response) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: response.responseJSON?.message || 'Não foi possível realizar o login. Tente novamente.',
+                });
+            }
+        });
+    });
 });

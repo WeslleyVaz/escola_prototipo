@@ -16,6 +16,6 @@ class GestaoToken extends Model
 
     public function gestao()
     {
-        return $this->belongsTo(Gestao::class, 'gestao_id');
+        return $this->belongsTo(gestao::class, 'gestao_id');
     }
 }
