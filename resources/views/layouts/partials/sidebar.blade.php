@@ -1,7 +1,7 @@
 @php
     $navigationItems = [
         ['key' => 'inicio', 'label' => 'Início', 'icon' => 'bi-house-door', 'route' => $navigationRole === 'coordination' ? 'dashboard-coordenacao' : 'dashboard-inspetoras'],
-        ['key' => 'alunos', 'label' => 'Alunos', 'icon' => 'bi-people', 'route' => $navigationRole === 'coordination' ? 'alunos-gestao' : 'alunos'],
+        ['key' => 'alunos', 'label' => $navigationRole === 'coordination' ? 'Alunos - Gestão' : 'Alunos', 'icon' => 'bi-people', 'route' => $navigationRole === 'coordination' ? 'alunos-gestao' : 'alunos'],
         ['key' => 'ocorrencias', 'label' => $navigationRole === 'coordination' ? 'Consultar Ocorrências' : 'Ocorrências', 'icon' => 'bi-book', 'route' => $navigationRole === 'coordination' ? 'consulta-ocorrencias' : 'ocorrencias'],
         ['key' => 'saidas', 'label' => $navigationRole === 'coordination' || request()->routeIs('dashboard-inspetoras') ? 'Saídas antecipadas' : 'Saídas', 'icon' => 'bi-box-arrow-right', 'route' => 'saidas-antecipadas'],
     ];

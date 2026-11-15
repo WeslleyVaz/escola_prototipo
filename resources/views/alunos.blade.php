@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
-@section('title', 'Alunos')
-@section('page-heading', 'Alunos')
+@section('title', $isManagement ? 'Alunos - Gestão' : 'Alunos')
+@section('page-heading', $isManagement ? 'Alunos - Gestão' : 'Alunos')
 @section('active-page', 'alunos')
 @section('navigation-role', $isManagement ? 'coordination' : 'inspector')
 @section('user-name', $isManagement ? 'Gestão Escolar' : 'Amanda Silva')
@@ -27,7 +27,7 @@
     <header class="students-title">
         <a class="students-brand" href="{{ route($isManagement ? 'dashboard-coordenacao' : 'dashboard-inspetoras') }}" aria-label="Voltar ao painel"><img src="{{ asset('sesi-logo.png') }}" alt="SESI" width="286" height="286"></a>
         <i class="bi bi-people-fill" aria-hidden="true"></i>
-        <h2>ALUNOS</h2>
+        <h2>{{ $isManagement ? 'ALUNOS - GESTÃO' : 'ALUNOS' }}</h2>
     </header>
 
     <div class="table-responsive data-table-wrap">
