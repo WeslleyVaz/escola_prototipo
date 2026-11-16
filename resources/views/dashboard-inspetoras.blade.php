@@ -19,6 +19,12 @@
         ];
     @endphp
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    @vite(['resources/js/login.js', 'resources/js/cadastro_funcionario.js'])
+
     <section class="stat-grid stat-grid-three" aria-label="Resumo escolar">
         <article class="stat-card">
             <div class="stat-card-label">Total de alunos cadastrados <i class="bi bi-people"></i></div>

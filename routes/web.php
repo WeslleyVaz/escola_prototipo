@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardGestaoController;
 use App\Http\Controllers\DashboardInspetorasController;
+use App\Http\Controllers\inspetoraController;
 use App\Http\Middleware\LogadoGestaoMiddleware;
 use App\Http\Middleware\LogadoWebMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,6 @@ Route::get('/dashboard-inspetoras', [DashboardInspetorasController::class, 'inde
 
 // login gestao//
 Route::get('/dashboard-coordenacao', [DashboardGestaoController::class, 'index_gestao'])->middleware(LogadoGestaoMiddleware::class)->name('dashboard-coordenacao');
+
+// salvar inspetora//
+Route::get('/salvar_inspetora', [inspetoraController::class, 'salvar_inspetoras'])->middleware(LogadoGestaoMiddleware::class);

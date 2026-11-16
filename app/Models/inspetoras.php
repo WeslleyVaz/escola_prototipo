@@ -11,6 +11,7 @@ class inspetoras extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'nome',
         'cpf',
         'senha',
     ];
@@ -26,5 +27,4 @@ class inspetoras extends Model
             'senha' => 'hashed',
         ];
     }
-
 }

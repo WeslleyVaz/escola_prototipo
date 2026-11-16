@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\inspetoras;
+use App\Models\InspetorasToken;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\InspetorasToken;
 
 class inspetoraController
 {
     public function salvar_inspetora(Request $request)
     {
         $request->validate([
+            'nome' => 'required|string|max:255',
             'cpf' => 'required|string|max:14|unique:inspetoras,cpf',
             'senha' => 'required|string|min:6',
         ]);
 
         try {
             $inspetora = new inspetoras;
+            $inspetora->nome = $request->nome;
             $inspetora->cpf = $request->cpf;
             $inspetora->senha = Hash::make($request->senha);
 
@@ -53,29 +56,35 @@ class inspetoraController
     {
         $request->validate([
             'cpf' => ['required'],
-            'senha' => ['required', 'string']
+            'senha' => ['required', 'string'],
         ]);
 
-        $inspetoras = inspetoras::where('cpf', "=", $request->cpf)->first();
-        if($inspetoras){
+        $inspetoras = inspetoras::where('cpf', '=', $request->cpf)->first();
+        if ($inspetoras) {
             if (Hash::check($request->senha, $inspetoras->senha)) {
-                $inspetoras_token = new InspetorasToken();
+                $inspetoras_token = new InspetorasToken;
                 $inspetoras_token->inspetoras_id = $inspetoras->id;
-                $inspetoras_token->token_inspetora = Hash::make($inspetoras->id . $inspetoras->cpf . now());
+                $inspetoras_token->token_inspetora = Hash::make($inspetoras->id.$inspetoras->cpf.now());
                 $inspetoras_token->valido_ate = now()->addDays(7);
 
                 $inspetoras_token->save();
+
                 return response()->json(['message' => 'Login realizado com sucesso!', 'erro' => 'n', 'inspetora' => $inspetoras, 'token' => $inspetoras_token->token_inspetora], 200);
 
             } else {
                 return response()->json(['message' => 'Senha incorreta!', 'erro' => 's'], 200);
             }
 
-        }else {
+        } else {
             return response()->json(['message' => 'Inspetora nÃo encontrada!', 'erro' => 's'], 200);
         }
 
     }
 
-}
+    public function salvar_inspetoras(): View
+    {
+        $inspetoras = inspetoras::all();
 
+        return view('SalvarInspetoras', ['inspetoras' => $inspetoras]);
+    }
+}

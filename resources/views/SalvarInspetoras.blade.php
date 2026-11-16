@@ -1,0 +1,36 @@
+@extends('layouts.app')
+
+@section('title', 'Cadastrar Inspetora')
+@section('page-heading', 'Cadastrar Inspetora')
+@section('active-page', 'inicio')
+@section('navigation-role', 'coordination')
+@section('role-label', 'Coordenação')
+@section('role-initial', 'C')
+
+@section('content')
+    <section class="section-intro">
+        <h2>Cadastro de inspetora</h2>
+        <p>Preencha os dados para criar o acesso da inspetora.</p>
+    </section>
+
+    <form id="form-salvar-inspetora" class="row g-3" novalidate>
+        <div class="col-md-6">
+            <label for="nome" class="form-label">Nome completo</label>
+            <input type="text" class="form-control" id="nome" name="nome" maxlength="255" required>
+        </div>
+        <div class="col-md-6">
+            <label for="cpf" class="form-label">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" inputmode="numeric" maxlength="14" required>
+        </div>
+        <div class="col-md-6">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" minlength="6" required>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-sesi" id="salvar-inspetora">Salvar inspetora</button>
+        </div>
+        <div class="col-12" id="resultado-cadastro" role="status" aria-live="polite"></div>
+    </form>
+
+    @vite(['resources/js/cadastro_funcionario.js'])
+@endsection
