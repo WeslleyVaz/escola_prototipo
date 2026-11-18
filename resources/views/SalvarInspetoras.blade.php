@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Cadastrar Inspetora')
-@section('page-heading', 'Cadastrar Inspetora')
+@section('title', 'Cadastrar Inspetor(a)')
+@section('page-heading', 'Cadastrar Inspetor(a)')
 @section('active-page', 'inicio')
 @section('navigation-role', 'coordination')
 @section('role-label', 'Coordenação')
@@ -9,8 +9,8 @@
 
 @section('content')
     <section class="section-intro">
-        <h2>Cadastro de inspetora</h2>
-        <p>Preencha os dados para criar o acesso da inspetora.</p>
+        <h2>Cadastro de inspetor(a)</h2>
+        <p>Preencha os dados para criar o acesso da inspetor(a).</p>
     </section>
 
     <form id="form-salvar-inspetora" class="row g-3" novalidate>
@@ -27,7 +27,7 @@
             <input type="password" class="form-control" id="senha" name="senha" minlength="6" required>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-sesi" id="salvar-inspetora">Salvar inspetora</button>
+            <button type="submit" class="btn btn-sesi" id="salvar-inspetora">Salvar inspetor(a)</button>
         </div>
         <div class="col-12" id="resultado-cadastro" role="status" aria-live="polite"></div>
     </form>

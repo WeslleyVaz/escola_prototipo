@@ -87,4 +87,11 @@ class inspetoraController
 
         return view('SalvarInspetoras', ['inspetoras' => $inspetoras]);
     }
+
+        public function registrar_ocorrencia(): View
+    {
+        $inspetoras = inspetoras::all();
+
+        return view('registrar-ocorrencia', ['inspetoras' => $inspetoras]);
+    }
 }

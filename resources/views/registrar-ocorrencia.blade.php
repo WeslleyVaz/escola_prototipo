@@ -16,7 +16,7 @@
             <label class="field-group field-student">
                 <span>Aluno</span>
                 <span class="field-with-icon">
-                    <input class="form-control" type="search" placeholder="Pesquise pelo nome ou RM do aluno">
+                    <input class="form-control" type="search" name="aluno" placeholder="Pesquise pelo nome ou RM do aluno" required>
                     <i class="bi bi-search" aria-hidden="true"></i>
                 </span>
             </label>
@@ -53,7 +53,11 @@
 
             <label class="field-group field-full">
                 <span>Funcionária Responsável</span>
-                <input class="form-control" type="text" value="Amanda Silva (Logada no sistema)" readonly>
+                <select class="from-select-sm" id="inspetora_responsavel" name="inspetora_responsavel" required>
+                    <option value="">Selecione a inspetora responsável</option>
+                    @foreach ($inspetoras as $i)
+                        <option value="{{ $i ['id'] }}">{{ $i['nome'] }}</option>
+                    @endforeach
             </label>
 
             <div class="form-actions field-full">
@@ -62,7 +66,7 @@
                     <a class="btn btn-sesi" href="{{ route('ocorrencias') }}">Confirmar Ocorrência</a>
                 @else
                     <a class="btn btn-text" href="{{ route('ocorrencias') }}">Cancelar</a>
-                <button class="btn btn-sesi" type="submit">Registrar Ocorrência</button>
+                <button class="btn btn-sesi" type="submit" id="registrar-ocorrencia">Registrar Ocorrência</button>
                 @endif
             </div>
         </form>
