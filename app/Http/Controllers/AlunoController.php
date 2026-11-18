@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\aluno;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class AlunoController
 {
@@ -32,5 +33,21 @@ class AlunoController
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Erro ao cadastrar aluno!', 'erro' => 's', 'msg_erro' => $th->getMessage()], 200);
         }
+    }
+
+    public function tabela_html(Request $request){
+        
+        $dados = Aluno::select('aluno.nome, aluno.nome_responsavel, aluno.rm, aluno.turma, aluno.numero_responsavel')
+        ->join('alunos', '=', 'aluno.id')
+        ->get();
+        
+        return view('TabelaTeste');
+
+    }
+
+    public function TabelaTeste(Request $request){
+        $dados_alunos = Aluno::all();
+        return view('TabelaTeste')->with('dados',$dados_alunos);
+
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\inspetoraController;
 use App\Http\Middleware\LogadoGestaoMiddleware;
 use App\Http\Middleware\LogadoWebMiddleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AlunoController;
 
 Route::view('/', 'inicio')->name('inicio');
 
@@ -38,3 +39,7 @@ Route::get('/dashboard-coordenacao', [DashboardGestaoController::class, 'index_g
 
 // salvar inspetora//
 Route::get('/salvar_inspetora', [inspetoraController::class, 'salvar_inspetoras'])->middleware(LogadoGestaoMiddleware::class);
+
+
+//mostrar tabela teste//
+Route::get('/TabelaTeste', [AlunoController::class, 'TabelaTeste'])->middleware(LogadoWebMiddleware::class);
