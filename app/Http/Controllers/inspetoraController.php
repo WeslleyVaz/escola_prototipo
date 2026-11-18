@@ -92,6 +92,6 @@ class inspetoraController
     {
         $inspetoras = inspetoras::all();
 
-        return view('registrar-ocorrencia', ['inspetoras' => $inspetoras]);
+        return view('registrar-ocorrencia')->with('inspetoras', $inspetoras);
     }
 }

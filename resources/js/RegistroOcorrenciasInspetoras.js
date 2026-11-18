@@ -12,11 +12,11 @@ $(document).ready(function() {
             return false;
         }
 
-        let gestao = $.cookie('aluno');
-        let token = $.cookie('token');
+        let inspetora = $.cookie('inspetora');
+        let token_inspetora = $.cookie('token_inspetora');
 
         jq.ajax({
-            url: '../api/salvar_inspetora',
+            url: '../api/salvar_ocorrencias',
             type: 'POST',
             data: {
                 nome_aluno: $('#aluno').val(),
@@ -33,7 +33,6 @@ $(document).ready(function() {
                         icon: 'success',
                         title: 'Sucesso',
                         text: 'mensagem de sucesso',
-                        inspetora_responsavel: $('#inspetora_responsavel').val(),
 
                     })
                 }
