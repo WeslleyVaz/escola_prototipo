@@ -13,6 +13,25 @@ $(document).ready(function() {
             return false;
         }
 
+        let file = $("#imagem")[0]. file[0];
+        if (file && file.size > 100000000) {
+            Swal.fire({
+                icon: "warning",
+                title: "imagem gigantesca slc",
+                text: "coloque uma imagem mais magra pfvr"
+            })
+            return;
+        }
+        let formData = new FormData();
+        if (file) {
+            formData.append("imagem", file);
+        }
+        formData.append("nome").val();
+        formData.append("cpf").val();
+        formData.append("senha");
+
+
+        
         $.ajax({
             type: "POST",
             url: "../api/salvar_inspetora",

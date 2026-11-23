@@ -16,6 +16,7 @@ class aluno extends Model
         'rm',
         'turma',
         'numero_responsavel',
+        'imagem',
     ];
 
     protected $hidden = ['senha'];

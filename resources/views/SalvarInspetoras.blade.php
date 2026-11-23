@@ -26,10 +26,19 @@
             <label for="senha" class="form-label">Senha</label>
             <input type="password" class="form-control" id="senha" name="senha" minlength="6" required>
         </div>
+        <div class="col-md-6">
+        <label for="imagem" class="form-label">imagem</label>
+        <input class="form-control form-control-sm" type="file" id="imagem" name=imagem>
+        </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-sesi" id="salvar-inspetora">Salvar inspetor(a)</button>
+            <button type="button" class="btn btn-sesi" id="salvar-inspetora">Salvar inspetor(a)</button>
         </div>
         <div class="col-12" id="resultado-cadastro" role="status" aria-live="polite"></div>
+        
+        <div class="form-field">
+       
+        </div>
+        
     </form>
 
     @vite(['resources/js/cadastro_funcionario.js'])

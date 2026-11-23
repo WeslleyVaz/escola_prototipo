@@ -16,9 +16,17 @@ class inspetoraController
             'nome' => 'required|string|max:255',
             'cpf' => 'required|string|max:14|unique:inspetoras,cpf',
             'senha' => 'required|string|min:6',
+            'iamgem' => 'nullable|image|max:100000000'
         ]);
 
         try {
+            $inspetora = new inspetoras ();
+            if($request->hasFile('imagem')) {
+                $imagem = $request->file('imagem');
+                $caminho = $imagem->store('imagens', 'public');
+                $inspetora->imagem = $caminho;
+            }
+
             $inspetora = new inspetoras;
             $inspetora->nome = $request->nome;
             $inspetora->cpf = $request->cpf;
