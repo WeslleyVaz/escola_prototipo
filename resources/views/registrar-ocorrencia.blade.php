@@ -56,7 +56,7 @@
                 <select class="from-select-sm" id="inspetora_responsavel" name="inspetora_responsavel" required>
                     <option value="">Selecione a inspetora responsável</option>
                     @foreach ($inspetoras as $i)
-                        <option value="{{ $i ['id'] }}">{{ $i['nome'] }}</option>
+                        <option value="{{ $i['id'] }}">{{ $i['nome'] }}</option>
                     @endforeach
             </label>
 

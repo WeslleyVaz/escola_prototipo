@@ -7,6 +7,7 @@ use App\Models\InspetorasToken;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 
 class inspetoraController
 {

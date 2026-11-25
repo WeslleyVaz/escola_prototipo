@@ -20,7 +20,7 @@ Route::view('/alunos', 'alunos', ['isManagement' => false])->name('alunos');
 Route::view('/alunos-gestao', 'alunos', ['isManagement' => true])->name('alunos-gestao');
 
 Route::view('/ocorrencias', 'ocorrencias')->name('ocorrencias');
-Route::view('/registrar-ocorrencia', 'registrar-ocorrencia')->name('registrar-ocorrencia');
+
 Route::view('/confirmar-ocorrencia', 'registrar-ocorrencia')->name('confirmar-ocorrencia');
 Route::view('/consulta-ocorrencias', 'consulta-ocorrencias')->name('consulta-ocorrencias');
 Route::view('/detalhes-ocorrencia', 'detalhes-ocorrencia')->name('detalhes-ocorrencia');
@@ -40,6 +40,9 @@ Route::get('/dashboard-coordenacao', [DashboardGestaoController::class, 'index_g
 // salvar inspetora//
 Route::get('/salvar_inspetora', [inspetoraController::class, 'salvar_inspetoras'])->middleware(LogadoGestaoMiddleware::class);
 
+//registro de ocorrencia//
+Route::get('/registrar-ocorrencia', [inspetoraController::class, 'registrar_ocorrencia'])->name('registrar-ocorrencia');
+Route::get('/confirmar-ocorrencia', [inspetoraController::class, 'registrar-ocorrencia'])->name('confirmar-ocorrencia');
 
 //mostrar tabela teste//
 Route::get('/TabelaTeste', [AlunoController::class, 'TabelaTeste'])->middleware(LogadoWebMiddleware::class);

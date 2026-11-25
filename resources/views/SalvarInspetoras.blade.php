@@ -31,13 +31,11 @@
         <input class="form-control form-control-sm" type="file" id="imagem" name=imagem>
         </div>
         <div class="col-12">
-            <button type="button" class="btn btn-sesi" id="salvar-inspetora">Salvar inspetor(a)</button>
+            <button type="button" class="btn btn-sesi" id="SalvarI">Salvar inspetor(a)</button>
         </div>
-        <div class="col-12" id="resultado-cadastro" role="status" aria-live="polite"></div>
-        
-        <div class="form-field">
-       
-        </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
         
     </form>
 

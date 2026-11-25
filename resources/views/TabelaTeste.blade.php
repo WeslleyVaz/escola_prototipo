@@ -14,6 +14,7 @@
       <th scope="col">Responsavel</th>
       <th scope="col">Rm</th>
       <th scope="col">Turma</th>
+      <th scope="col">imagem</th>
       <th scope="col">Numero do responsavel</th>
     </tr>
   </thead>
@@ -24,7 +25,13 @@
         <td>{{ $d['nome_responsavel'] }}</td>
         <td>{{ $d['rm'] }}</td>
         <td>{{ $d['turma'] }}</td>
+        <td>
+          @if(isset($d['imagem']))
+              <img src="{{  Storage::url($d['imagem']) }}" alt="imagem" style="max-width: 100px; max-height: 100px;">
+          @endif
+        </td>
         <td>{{ $d['numero_responsavel'] }}</td>
+        
     </tr>
   </tbody>
 @endforeach

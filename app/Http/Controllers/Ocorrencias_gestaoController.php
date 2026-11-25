@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Ocorrencias_gestao;
 use App\Models\Ocorrencias_inspetoras;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class Ocorrencias_gestaoController
 {
+
+    
+
     // vizualizar ocorrencia
     public function ver_ocorrencia(Request $request)
     {

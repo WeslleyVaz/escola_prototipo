@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'gestao_token',
             'token_gestao',
             'gestao_id',
+            
         ]);
     })
 

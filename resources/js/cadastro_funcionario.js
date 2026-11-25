@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#registrar-inspetora").click(function() {
+    $("#SalvarI").click(function() {
 
         if ($('#cpf').val() == "" || $('#senha').val() == "") {
 
@@ -13,7 +13,9 @@ $(document).ready(function() {
             return false;
         }
 
-        let file = $("#imagem")[0]. file[0];
+        
+
+        let file = $("#imagem")[0].files[0];
         if (file && file.size > 100000000) {
             Swal.fire({
                 icon: "warning",
@@ -26,20 +28,20 @@ $(document).ready(function() {
         if (file) {
             formData.append("imagem", file);
         }
-        formData.append("nome").val();
-        formData.append("cpf").val();
-        formData.append("senha");
-
+        formData.append("nome", $("#nome").val());
+        formData.append("cpf", $("#cpf").val());
+        formData.append("senha", $("#senha").val());
+        formData.append("gestao_id", gestao_id);
+        formData.append("token_gestao", token_gestao);
 
         
         $.ajax({
             type: "POST",
             url: "../api/salvar_inspetora",
-            data: {
-                nome: $('#nome').val(),
-                cpf: $('#cpf').val(),
-                senha: $('#senha')
-            },
+            data: formData,
+            processData: false,
+            contentType: false,
+
             success: function (response) {
                 if(response.erro == 'n'){
                     Swal.fire({

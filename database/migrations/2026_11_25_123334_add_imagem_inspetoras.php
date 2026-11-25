@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+         Schema::table('inspetoras', function (Blueprint $table){
+            $table->string('imagem')->nullable()->after('senha');
+        });
     }
 
     /**
@@ -19,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+         Schema::table('inspetoras', function (Blueprint $table){
+            $table->dropColumn('imagem');
+        });
     }
 };
