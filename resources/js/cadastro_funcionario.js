@@ -13,8 +13,17 @@ $(document).ready(function() {
             return false;
         }
 
+        const token_gestao = $.cookie('token_gestao');
+        const gestao_id = $.cookie('gestao_id');
+        if($('#tokenGestao').val() == " " || $('#gestao_id').val() == " ") {
+            Swal.fire({
+                icon: 'error',
+                title: 'sessão expirada',
+                text: 'Entre novamente para continuar'
+            });
+            return;
+        }
         
-
         let file = $("#imagem")[0].files[0];
         if (file && file.size > 100000000) {
             Swal.fire({

@@ -17,9 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'token',
             'inspetora_token',
             'inspetoras_id',
-            'gestao_token',
-            'token_gestao',
             'gestao_id',
+            'token_gestao',
+            'gestao_token',
+            'gestaoToken'
             
         ]);
     })

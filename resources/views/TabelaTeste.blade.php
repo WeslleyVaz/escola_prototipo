@@ -31,10 +31,12 @@
           @endif
         </td>
         <td>{{ $d['numero_responsavel'] }}</td>
-        
+
     </tr>
   </tbody>
 @endforeach
+
+
 
 </table>
 

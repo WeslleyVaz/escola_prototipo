@@ -17,7 +17,7 @@ class LoginGestaoApiMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (request()->has('token_gestao') && $request->has('gestao_id')) {
+        if ($request->has('token_gestao') && $request->has('gestao_id')) {
             $token = GestaoToken::where('gestao_id', $request->gestao_id)
                 ->where('token_gestao', $request->token_gestao)
                 ->where('valido_ate', '>', Carbon::now())

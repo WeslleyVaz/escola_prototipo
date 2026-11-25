@@ -46,3 +46,6 @@ Route::get('/confirmar-ocorrencia', [inspetoraController::class, 'registrar-ocor
 
 //mostrar tabela teste//
 Route::get('/TabelaTeste', [AlunoController::class, 'TabelaTeste'])->middleware(LogadoWebMiddleware::class);
+
+//salvar aluno//
+Route::get('/SalvarAluno', [AlunoController::class, 'salvar_aluno'])->middleware(LogadoGestaoMiddleware::class);
